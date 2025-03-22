@@ -8,41 +8,71 @@ import googleIcon from "../assets/images/google_icon.png";
 import Image from "next/image";
 
 export default function SignupPage() {
+  const [userData, setUserData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
   const router = useRouter();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
   const [error, setError] = useState("");
-  const handleSignup = async (e: React.FormEvent) => {
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUserData({ ...userData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
 
-    const res = await fetch("http://localhost:4500/auth/signup", {
-      method: "POST",
-      body: JSON.stringify({ name, email, password }),
-      headers: { "Content-Type": "application/json" },
-    });
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/signup`,
+        {
+          method: "POST",
+          body: JSON.stringify({ ...userData, role: "student" }),
+          headers: { "Content-Type": "application/json" },
+        }
+      );
 
-    const data = await res.json();
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || "Signup failed");
 
-    if (!res.ok) {
-      setError(data.message || "Failed to create account");
-      return;
-    }
-
-    // ✅ Automatically log in after signup using NextAuth
-    const result = await signIn("credentials", {
-      redirect: false,
-      email,
-      password,
-    });
-
-    if (result?.error) {
-      setError("Signup successful, but login failed. Please try logging in.");
-    } else {
-      router.push("/dashboard"); // Redirect to dashboard
+      router.push("/login"); // Redirect to login after successful signup
+    } catch (err: any) {
+      setError(err.message);
     }
   };
+
+  // const handleSignup = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   setError("");
+
+  //   const res = await fetch("http://localhost:4500/auth/signup", {
+  //     method: "POST",
+  //     body: JSON.stringify({ name, email, password }),
+  //     headers: { "Content-Type": "application/json" },
+  //   });
+
+  //   const data = await res.json();
+
+  //   if (!res.ok) {
+  //     setError(data.message || "Failed to create account");
+  //     return;
+  //   }
+
+  //   // ✅ Automatically log in after signup using NextAuth
+  //   const result = await signIn("credentials", {
+  //     redirect: false,
+  //     email,
+  //     password,
+  //   });
+
+  //   if (result?.error) {
+  //     setError("Signup successful, but login failed. Please try logging in.");
+  //   } else {
+  //     router.push("/dashboard"); // Redirect to dashboard
+  //   }
+  // };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
@@ -51,35 +81,37 @@ export default function SignupPage() {
 
         {error && <p className="text-red-500 text-sm text-center">{error}</p>}
 
-        {/* Name Input */}
-        <div className="relative">
-          <input
-            type="text"
-            id="name"
-            className="peer w-full px-4 pt-5 pb-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 text-lg"
-            placeholder=" "
-            value={name} // ✅ Fix: Use name state
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-          <label
-            htmlFor="name"
-            className="absolute left-4 top-3 text-gray-500 text-lg transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-1 peer-focus:text-sm peer-focus:text-purple-600"
-          >
-            Name
-          </label>
-        </div>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {/* Name Input */}
+          <div className="relative">
+            <input
+              type="text"
+              id="name"
+              name="name"
+              className="peer w-full px-4 pt-5 pb-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 text-lg"
+              placeholder=" "
+              value={userData.name} // ✅ Fix: Use name state
+              onChange={handleChange}
+              required
+            />
+            <label
+              htmlFor="name"
+              className="absolute left-4 top-3 text-gray-500 text-lg transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-1 peer-focus:text-sm peer-focus:text-purple-600"
+            >
+              Name
+            </label>
+          </div>
 
-        <form onSubmit={handleSignup} className="space-y-4">
           {/* Email Input */}
           <div className="relative">
             <input
               type="email"
               id="email"
+              name="email"
               className="peer w-full px-4 pt-5 pb-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 text-lg"
               placeholder=" "
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={userData.email}
+              onChange={handleChange}
               required
             />
             <label
@@ -95,10 +127,11 @@ export default function SignupPage() {
             <input
               type="password"
               id="password"
+              name="password"
               className="peer w-full px-4 pt-5 pb-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 text-lg"
               placeholder=" "
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={userData.password}
+              onChange={handleChange}
               required
             />
             <label
@@ -122,7 +155,7 @@ export default function SignupPage() {
 
         {/* Google Signup */}
         <button
-          onClick={() => signIn("google")}
+          onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
           className="w-full flex items-center justify-center border p-3 rounded-lg hover:bg-gray-200"
         >
           <Image

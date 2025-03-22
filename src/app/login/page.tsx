@@ -9,27 +9,39 @@ import Image from "next/image";
 
 export default function LoginPage() {
   const router = useRouter();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [credentials, setCredentials] = useState({ email: "", password: "" });
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCredentials({ ...credentials, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-  
-    const result = await signIn("credentials", {
+
+    const res = await signIn("credentials", {
+      email: credentials.email,
+      password: credentials.password,
       redirect: false,
-      email,
-      password,
     });
-  
-    if (result?.error) {
-      setError("Invalid email or password");
+
+    if (res?.error) {
+      setError(res.error);
     } else {
-      router.push("/dashboard"); // Redirect user to dashboard after successful login
+      router.push("/dashboard"); // Redirect after login
     }
   };
-  
+
+  const handleGoogleSignIn = async () => {
+    const res = await signIn("google", { redirect: false });
+
+    if (res?.ok) {
+      router.push("/dashboard"); // Redirect manually
+    } else {
+      setError("Google login failed");
+    }
+  };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
@@ -39,16 +51,17 @@ export default function LoginPage() {
         {error && <p className="text-red-500 text-sm text-center">{error}</p>}
 
         {/* Manual Login Form */}
-        <form onSubmit={handleLogin} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
           {/* Email Input */}
           <div className="relative">
             <input
               type="email"
               id="email"
+              name="email"
               className="peer w-full px-4 pt-5 pb-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 text-lg"
               placeholder=" "
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={credentials.email}
+              onChange={handleChange}
               required
             />
             <label
@@ -64,10 +77,11 @@ export default function LoginPage() {
             <input
               type="password"
               id="password"
+              name="password"
               className="peer w-full px-4 pt-5 pb-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 text-lg"
               placeholder=" "
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={credentials.password}
+              onChange={handleChange}
               required
             />
             <label
@@ -91,7 +105,8 @@ export default function LoginPage() {
 
         {/* Google Login */}
         <button
-          onClick={() => signIn("google")}
+          // onClick={handleGoogleSignIn}
+          onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
           className="w-full flex items-center justify-center border p-3 rounded-lg hover:bg-gray-200"
         >
           <Image
