@@ -26,7 +26,7 @@ interface Comments {
 
 export default function LecturePage() {
     const router = useRouter();
-    const { courseId, lectureId } = router.query;
+    const {lectureId } = router.query;
     const [lecture, setLecture] = useState<Lecture | null>(null);
     const [comments, setComments] = useState<Comments[]>([]);
 

@@ -6,17 +6,9 @@ interface FooterProps {
   className?: string;
 }
 
-// export default function Footer({ className = "" }: FooterProps) {
-//   return (
-//     <footer className={`bg-gray-900 text-white p-4 text-center ${className}`}>
-//       © {new Date().getFullYear()} MyApp. All rights reserved.
-//     </footer>
-//   );
-// }
-
 export default function Footer({ className = "" }: FooterProps) {
   return (
-    <footer className="bg-gray-900 text-gray-300 py-10 px-6">
+    <footer className={`bg-gray-900 text-gray-300 py-10 px-6 ${className}`}>
       <div className="max-w-7xl mx-auto">
         {/* Grid Layout for Footer */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">

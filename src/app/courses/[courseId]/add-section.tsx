@@ -28,6 +28,7 @@ export default function AddSection({
       );
       router.push(`/courses/${params.courseId}`);
     } catch (err) {
+      console.log("Error", err);
       setError("Failed to add section. Please try again.");
     } finally {
       setLoading(false);

@@ -1,24 +1,7 @@
-// import React from "react";
-
-// const HomePage = () => {
-//   return (
-//     <div>
-//       <h1 className="text-3xl font-bold underline">Hello world!</h1>
-//       <p>
-//         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem tempora
-//         explicabo mollitia, sapiente non accusantium labore tempore veniam!
-//         Numquam, officiis culpa tenetur placeat fugiat iste id ducimus saepe est
-//         aperiam sequi iure maxime!
-//       </p>
-//     </div>
-//   );
-// };
-
-// export default HomePage;
 "use client";
 
 import { useState } from "react";
-import { Carousel } from "@/components/ui/carousel";
+// import { Carousel } from "@/components/ui/carousel";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
@@ -118,9 +101,8 @@ export default function HomePage() {
                 key={index}
                 className="min-w-[250px] sm:min-w-[300px] md:min-w-[350px] bg-white p-6 shadow-lg rounded-2xl text-center"
               >
-                <p className="italic text-gray-700 text-lg">
-                  "{testimonial.text}"
-                </p>
+                <p>{testimonial.text.replace(/"/g, "&quot;")}</p>
+
                 <h4 className="font-semibold mt-3 text-gray-900">
                   - {testimonial.name}
                 </h4>

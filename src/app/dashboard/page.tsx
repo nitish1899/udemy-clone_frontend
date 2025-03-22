@@ -54,12 +54,15 @@ export default function InstructorDashboard() {
         );
         setDashboardData(response.data);
       } catch (err) {
+        console.log("Error", err);
         setError("Failed to load dashboard data.");
       } finally {
         setLoading(false);
       }
     }
-  });
+
+    fetchDashboardData();
+  }, []);
 
   if (loading) return <p className="text-center">Loading...</p>;
   if (error) return <p className="text-red-500 text-center">{error}</p>;
@@ -132,9 +135,7 @@ export default function InstructorDashboard() {
                 </button>
                 <button
                   onClick={() =>
-                    router.push(
-                      `/courses/${course.id}/add-section`
-                    )
+                    router.push(`/courses/${course.id}/add-section`)
                   }
                   className="bg-purple-500 text-white px-3 py-1 rounded-lg hover:bg-purple-600"
                 >

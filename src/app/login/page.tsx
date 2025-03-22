@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
+// import Link from "next/link";
 import googleIcon from "../assets/images/google_icon.png";
 import Image from "next/image";
 
@@ -33,15 +33,15 @@ export default function LoginPage() {
     }
   };
 
-  const handleGoogleSignIn = async () => {
-    const res = await signIn("google", { redirect: false });
+  // const handleGoogleSignIn = async () => {
+  //   const res = await signIn("google", { redirect: false });
 
-    if (res?.ok) {
-      router.push("/dashboard"); // Redirect manually
-    } else {
-      setError("Google login failed");
-    }
-  };
+  //   if (res?.ok) {
+  //     router.push("/dashboard"); // Redirect manually
+  //   } else {
+  //     setError("Google login failed");
+  //   }
+  // };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
@@ -120,10 +120,10 @@ export default function LoginPage() {
         </button>
 
         <p className="text-center mt-4">
-          Don't have an account?{" "}
-          <Link href="/signup" className="text-purple-600 hover:underline">
+          Don&apos;t have an account?&nbsp;
+          <a href="/signup" className="text-purple-600 hover:underline">
             Sign up
-          </Link>
+          </a>
         </p>
       </div>
     </div>

@@ -38,6 +38,7 @@ export default function EditCourse({
         setDescription(course.description);
         setApproved(course.approved);
       } catch (err) {
+        console.log("Error", err);
         setError("Failed to load course data.");
       } finally {
         setLoading(false);
@@ -60,6 +61,7 @@ export default function EditCourse({
 
       router.push("/dashboard"); // Redirect after successful update
     } catch (err) {
+      console.log("Error", err);
       setError("Failed to update course.");
     }
   };

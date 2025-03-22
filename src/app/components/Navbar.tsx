@@ -4,15 +4,15 @@ import { useState } from "react";
 import { useSession, signOut } from "next-auth/react";
 import { Search, ShoppingCart, Bell, Menu, X } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
-import { useRouter } from "next/navigation"; // Next.js 13+
+// import Image from "next/image";
+// import { useRouter } from "next/navigation"; // Next.js 13+
 
 export default function Navbar() {
   const { data: session } = useSession();
   const [search, setSearch] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
-  const router = useRouter();
+  // const router = useRouter();
 
   const getUserInitials = (name: string) => {
     if (!name) return "U"; // Default initial if no name is available

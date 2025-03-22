@@ -46,6 +46,7 @@ export default function InstructorDashboard() {
         );
         setDashboardData(response.data);
       } catch (err) {
+        console.log("Error", err);
         setError("Failed to load dashboard data.");
       } finally {
         setLoading(false);
