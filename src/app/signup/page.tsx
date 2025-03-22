@@ -47,7 +47,7 @@ export default function SignupPage() {
   //   e.preventDefault();
   //   setError("");
 
-  //   const res = await fetch("http://localhost:4500/auth/signup", {
+  //   const res = await fetch("https://udemy-clone-q2wf.onrender.com/auth/signup", {
   //     method: "POST",
   //     body: JSON.stringify({ name, email, password }),
   //     headers: { "Content-Type": "application/json" },

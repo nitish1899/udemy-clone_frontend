@@ -42,7 +42,7 @@ export default function InstructorDashboard() {
     async function fetchDashboardData() {
       try {
         const response = await axios.get(
-          "http://localhost:4500/instructor/dashboard"
+          "https://udemy-clone-q2wf.onrender.com/instructor/dashboard"
         );
         setDashboardData(response.data);
       } catch (err) {

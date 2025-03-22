@@ -21,7 +21,7 @@ export default function AddSection({
 
     try {
       await axios.post(
-        `http://localhost:4500/courses/${params.courseId}/sections`,
+        `https://udemy-clone-q2wf.onrender.com/courses/${params.courseId}/sections`,
         {
           title,
         }

@@ -14,7 +14,7 @@ export default function CreateCourse() {
     e.preventDefault();
     setLoading(true);
     try {
-      await axios.post("http://localhost:4500/courses", {
+      await axios.post("https://udemy-clone-q2wf.onrender.com/courses", {
         title,
         description,
       });

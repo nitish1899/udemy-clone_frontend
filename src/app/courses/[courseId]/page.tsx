@@ -1,6 +1,5 @@
 // Displays course details, lectures list, and enroll button
 
-
 "use client";
 
 import { useEffect, useState } from "react";
@@ -36,13 +35,16 @@ export default function CourseDetail() {
       if (!courseId || !session?.user?.accessToken) return; // ✅ Wait until both `courseId` and `session` are available
 
       try {
-        const res = await fetch(`http://localhost:4500/courses/${courseId}`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${session.user.accessToken}`,
-          },
-        });
+        const res = await fetch(
+          `https://udemy-clone-q2wf.onrender.com/courses/${courseId}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${session.user.accessToken}`,
+            },
+          }
+        );
 
         if (!res.ok) throw new Error("Failed to fetch course");
 
@@ -70,7 +72,8 @@ export default function CourseDetail() {
       <h1>{course.title}</h1>
       <p>{course.description}</p>
       <p>Instructor: {course.instructor.name}</p>
-      <button onClick={() => enroll(String(courseId))}>Enroll Now</button> {/* ✅ Ensure `courseId` is a string */}
+      <button onClick={() => enroll(String(courseId))}>Enroll Now</button>{" "}
+      {/* ✅ Ensure `courseId` is a string */}
       <h2>Lectures</h2>
       <ul>
         {course.lectures.map((lecture) => (
@@ -84,10 +87,6 @@ export default function CourseDetail() {
     </>
   );
 }
-
-
-
-
 
 /*
 // 1️⃣ NextAuth.js Configuration: /pages/api/auth/[...nextauth].ts

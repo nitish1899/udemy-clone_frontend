@@ -11,13 +11,16 @@ export async function GET(
   const token = cookieStore.get("access_token")?.value;
 
   try {
-    const response = await fetch(`http://localhost:4500/courses/${courseId}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: token ? `Bearer ${token}` : "",
-      },
-    });
+    const response = await fetch(
+      `https://udemy-clone-q2wf.onrender.com/courses/${courseId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token ? `Bearer ${token}` : "",
+        },
+      }
+    );
 
     if (!response.ok) {
       console.error(`Failed to fetch course: ${response.statusText}`);
