@@ -14,32 +14,32 @@ export default function Navbar() {
   const [showSearch, setShowSearch] = useState(false);
   // const router = useRouter();
 
-  const getUserInitials = (name: string) => {
-    if (!name) return "U"; // Default initial if no name is available
-    const nameParts = name.trim().split(" ");
-    const initials =
-      nameParts.length > 1
-        ? nameParts[0][0].toUpperCase() + nameParts[1][0].toUpperCase()
-        : nameParts[0][0].toUpperCase();
-    return initials;
-  };
+  // const getUserInitials = (name: string) => {
+  //   if (!name) return "U"; // Default initial if no name is available
+  //   const nameParts = name.trim().split(" ");
+  //   const initials =
+  //     nameParts.length > 1
+  //       ? nameParts[0][0].toUpperCase() + nameParts[1][0].toUpperCase()
+  //       : nameParts[0][0].toUpperCase();
+  //   return initials;
+  // };
 
-  const handleLogout = async () => {
-    try {
-      // Call backend logout API to clear HTTP-only cookies
-      await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/logout`, {
-        method: "POST",
-        credentials: "include", // Ensures cookies are included
-      });
+  // const handleLogout = async () => {
+  //   try {
+  //     // Call backend logout API to clear HTTP-only cookies
+  //     await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/logout`, {
+  //       method: "POST",
+  //       credentials: "include", // Ensures cookies are included
+  //     });
 
-      // NextAuth signOut - just redirects, does NOT call API again
-      await signOut({ redirect: true, callbackUrl: "/" });
-      // await signOut();
-      // router.push("/"); // Manually redirect
-    } catch (error) {
-      console.error("Logout failed:", error);
-    }
-  };
+  //     // NextAuth signOut - just redirects, does NOT call API again
+  //     await signOut({ redirect: true, callbackUrl: "/" });
+  //     // await signOut();
+  //     // router.push("/"); // Manually redirect
+  //   } catch (error) {
+  //     console.error("Logout failed:", error);
+  //   }
+  // };
 
   return (
     <nav className="flex items-center justify-between px-6 py-3 border-b bg-white shadow-sm h-16">
