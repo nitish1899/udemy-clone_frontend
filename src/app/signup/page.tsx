@@ -47,37 +47,6 @@ export default function SignupPage() {
     }
   };
 
-  // const handleSignup = async (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   setError("");
-
-  //   const res = await fetch("https://udemy-clone-q2wf.onrender.com/auth/signup", {
-  //     method: "POST",
-  //     body: JSON.stringify({ name, email, password }),
-  //     headers: { "Content-Type": "application/json" },
-  //   });
-
-  //   const data = await res.json();
-
-  //   if (!res.ok) {
-  //     setError(data.message || "Failed to create account");
-  //     return;
-  //   }
-
-  //   // ✅ Automatically log in after signup using NextAuth
-  //   const result = await signIn("credentials", {
-  //     redirect: false,
-  //     email,
-  //     password,
-  //   });
-
-  //   if (result?.error) {
-  //     setError("Signup successful, but login failed. Please try logging in.");
-  //   } else {
-  //     router.push("/dashboard"); // Redirect to dashboard
-  //   }
-  // };
-
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md p-8 bg-white shadow-lg rounded-lg">

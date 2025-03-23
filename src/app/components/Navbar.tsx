@@ -106,10 +106,9 @@ export default function Navbar() {
         </button>
 
         {/* Check if user is logged in */}
-        {session?.user ? (
-          <div className="flex items-center space-x-4">
-            {/* User Profile Picture */}
-            {/* <div className="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center">
+        {/* User Profile Picture */}
+        {/* 
+            <div className="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center">
               <Image
                 src={"/default-avatar.png"}
                 alt={getUserInitials(session.user.name)}
@@ -117,13 +116,15 @@ export default function Navbar() {
                 height={40}
                 className="rounded-full cursor-pointer"
               />
-            </div> */}
+            </div> 
+        */}
 
+        {/* {session?.user ? (
+          <div className="flex items-center space-x-4">
             <div className="w-10 h-10 rounded-full bg-purple-600 text-white flex items-center justify-center font-bold uppercase">
               {getUserInitials(session.user.name)}
             </div>
 
-            {/* Logout Button */}
             <button
               onClick={handleLogout}
               className="border border-red-500 text-red-500 px-4 py-2 rounded-lg hover:bg-red-500 hover:text-white cursor-pointer"
@@ -133,7 +134,6 @@ export default function Navbar() {
           </div>
         ) : (
           <>
-            {/* Login & Signup Buttons */}
             <Link href="/login">
               <button className="border border-purple-600 text-purple-600 px-4 py-2 rounded-lg hover:bg-purple-600 hover:text-white cursor-pointer">
                 Log in
@@ -145,7 +145,7 @@ export default function Navbar() {
               </button>
             </Link>
           </>
-        )}
+        )} */}
       </div>
 
       {/* Mobile Menu */}
