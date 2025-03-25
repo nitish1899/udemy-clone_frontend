@@ -37,7 +37,7 @@ export default function CourseDetail() {
 
       try {
         const res = await fetch(
-          `https://udemy-clone-q2wf.onrender.com/courses/${courseId}`,
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/courses/${courseId}`,
           {
             method: "GET",
             headers: {

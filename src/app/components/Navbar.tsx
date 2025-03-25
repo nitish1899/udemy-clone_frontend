@@ -14,32 +14,32 @@ export default function Navbar() {
   const [showSearch, setShowSearch] = useState(false);
   // const router = useRouter();
 
-  // const getUserInitials = (name: string) => {
-  //   if (!name) return "U"; // Default initial if no name is available
-  //   const nameParts = name.trim().split(" ");
-  //   const initials =
-  //     nameParts.length > 1
-  //       ? nameParts[0][0].toUpperCase() + nameParts[1][0].toUpperCase()
-  //       : nameParts[0][0].toUpperCase();
-  //   return initials;
-  // };
+  const getUserInitials = (name: string) => {
+    if (!name) return "U"; // Default initial if no name is available
+    const nameParts = name.trim().split(" ");
+    const initials =
+      nameParts.length > 1
+        ? nameParts[0][0].toUpperCase() + nameParts[1][0].toUpperCase()
+        : nameParts[0][0].toUpperCase();
+    return initials;
+  };
 
-  // const handleLogout = async () => {
-  //   try {
-  //     // Call backend logout API to clear HTTP-only cookies
-  //     await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/logout`, {
-  //       method: "POST",
-  //       credentials: "include", // Ensures cookies are included
-  //     });
+  const handleLogout = async () => {
+    try {
+      // Call backend logout API to clear HTTP-only cookies
+      await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/logout`, {
+        method: "POST",
+        credentials: "include", // Ensures cookies are included
+      });
 
-  //     // NextAuth signOut - just redirects, does NOT call API again
-  //     await signOut({ redirect: true, callbackUrl: "/" });
-  //     // await signOut();
-  //     // router.push("/"); // Manually redirect
-  //   } catch (error) {
-  //     console.error("Logout failed:", error);
-  //   }
-  // };
+      // NextAuth signOut - just redirects, does NOT call API again
+      await signOut({ redirect: true, callbackUrl: "/" });
+      // await signOut();
+      // router.push("/"); // Manually redirect
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  };
 
   return (
     <nav className="flex items-center justify-between px-6 py-3 border-b bg-white shadow-sm h-16">
@@ -106,9 +106,10 @@ export default function Navbar() {
         </button>
 
         {/* Check if user is logged in */}
-        {/* User Profile Picture */}
-        {/* 
-            <div className="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center">
+        {session?.user ? (
+          <div className="flex items-center space-x-4">
+            {/* User Profile Picture */} {/* User Profile Picture */}
+            {/* <div className="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center">
               <Image
                 src={"/default-avatar.png"}
                 alt={getUserInitials(session.user.name)}
@@ -116,15 +117,11 @@ export default function Navbar() {
                 height={40}
                 className="rounded-full cursor-pointer"
               />
-            </div> 
-        */}
-
-        {/* {session?.user ? (
-          <div className="flex items-center space-x-4">
+            </div> */}
             <div className="w-10 h-10 rounded-full bg-purple-600 text-white flex items-center justify-center font-bold uppercase">
               {getUserInitials(session.user.name)}
             </div>
-
+            {/* Logout Button */}
             <button
               onClick={handleLogout}
               className="border border-red-500 text-red-500 px-4 py-2 rounded-lg hover:bg-red-500 hover:text-white cursor-pointer"
@@ -134,6 +131,7 @@ export default function Navbar() {
           </div>
         ) : (
           <>
+            {/* Login & Signup Buttons */}
             <Link href="/login">
               <button className="border border-purple-600 text-purple-600 px-4 py-2 rounded-lg hover:bg-purple-600 hover:text-white cursor-pointer">
                 Log in
@@ -145,7 +143,7 @@ export default function Navbar() {
               </button>
             </Link>
           </>
-        )} */}
+        )}
       </div>
 
       {/* Mobile Menu */}

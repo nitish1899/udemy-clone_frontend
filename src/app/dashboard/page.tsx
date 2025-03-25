@@ -50,7 +50,7 @@ export default function InstructorDashboard() {
         const userId = session.user.id; // ✅ Extract userId
 
         const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/course/instructor/${userId}`
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/courses`
         );
         setDashboardData(response.data);
       } catch (err) {
@@ -84,13 +84,13 @@ export default function InstructorDashboard() {
       {/* Stats */}
       <div className="grid grid-cols-3 gap-4 mb-6">
         <div className="p-4 bg-blue-100 rounded-lg text-center">
-          <p className="text-lg font-semibold">{dashboardData.totalCourses}</p>
+          {/* <p className="text-lg font-semibold">{dashboardData.totalCourses}</p> */}
           <p className="text-sm">Total Courses</p>
         </div>
         <div className="p-4 bg-green-100 rounded-lg text-center">
-          <p className="text-lg font-semibold">
+          {/* <p className="text-lg font-semibold">
             {dashboardData.studentsEnrolled}
-          </p>
+          </p> */}
           <p className="text-sm">Students Enrolled</p>
         </div>
         {/* <div className="p-4 bg-yellow-100 rounded-lg text-center">
@@ -113,7 +113,7 @@ export default function InstructorDashboard() {
 
       {/* Courses List */}
       <h2 className="text-xl font-semibold mb-3">Your Courses</h2>
-      <ul className="space-y-3">
+      {/* <ul className="space-y-3">
         {dashboardData.courses.map((course) => (
           <li key={course.id} className="p-3 bg-white shadow rounded-lg">
             <div className="flex justify-between items-center">
@@ -144,7 +144,6 @@ export default function InstructorDashboard() {
               </div>
             </div>
 
-            {/* Show Sections if Course is Expanded */}
             {expandedCourses.includes(course.id) && (
               <ul className="ml-6 mt-2 space-y-2">
                 {course.sections.map((section) => (
@@ -163,7 +162,6 @@ export default function InstructorDashboard() {
                       </button>
                     </div>
 
-                    {/* Show Lectures */}
                     <ul className="ml-6 mt-2 space-y-1">
                       {section.lectures.map((lecture) => (
                         <li key={lecture.id} className="text-sm text-gray-700">
@@ -177,7 +175,7 @@ export default function InstructorDashboard() {
             )}
           </li>
         ))}
-      </ul>
+      </ul> */}
     </div>
   );
 }

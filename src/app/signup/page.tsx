@@ -127,7 +127,7 @@ export default function SignupPage() {
         <div className="text-center my-4">or</div>
 
         {/* Google Signup */}
-        <button
+        {/* <button
           onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
           className="w-full flex items-center justify-center border p-3 rounded-lg hover:bg-gray-200"
         >
@@ -139,7 +139,7 @@ export default function SignupPage() {
             className="mr-2"
           />
           Sign up with Google
-        </button>
+        </button> */}
 
         <p className="text-center mt-4">
           Already have an account?{" "}

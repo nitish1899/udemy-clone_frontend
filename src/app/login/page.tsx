@@ -4,8 +4,8 @@ import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 // import Link from "next/link";
-import googleIcon from "../assets/images/google_icon.png";
-import Image from "next/image";
+// import googleIcon from "../assets/images/google_icon.png";
+// import Image from "next/image";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -104,7 +104,7 @@ export default function LoginPage() {
         <div className="text-center my-4">or</div>
 
         {/* Google Login */}
-        <button
+        {/* <button
           // onClick={handleGoogleSignIn}
           onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
           className="w-full flex items-center justify-center border p-3 rounded-lg hover:bg-gray-200"
@@ -117,7 +117,7 @@ export default function LoginPage() {
             className="mr-2"
           />
           Continue with Google
-        </button>
+        </button> */}
 
         <p className="text-center mt-4">
           Don&apos;t have an account?&nbsp;

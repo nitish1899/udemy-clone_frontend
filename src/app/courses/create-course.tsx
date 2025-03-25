@@ -3,21 +3,35 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 export default function CreateCourse() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [price, setPrice] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+
+  const token = Cookies.get("token");
 
   const handleCreateCourse = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     try {
-      await axios.post("https://udemy-clone-q2wf.onrender.com/courses", {
-        title,
-        description,
-      });
+      await axios.post(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/courses`,
+        {
+          title,
+          description,
+          price,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, // Add token here
+          },
+        }
+      );
       router.push("/dashboard");
     } catch (error) {
       console.error("Failed to create course", error);
@@ -45,6 +59,14 @@ export default function CreateCourse() {
           className="w-full p-2 border rounded"
           required
         ></textarea>
+        <input
+          type="text"
+          placeholder="Price"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+          className="w-full p-2 border rounded"
+          required
+        />
         <button
           type="submit"
           className="bg-blue-500 text-white px-4 py-2 rounded"
