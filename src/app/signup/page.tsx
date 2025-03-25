@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { signIn } from "next-auth/react";
+// import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import googleIcon from "../assets/images/google_icon.png";
-import Image from "next/image";
+// import googleIcon from "../assets/images/google_icon.png";
+// import Image from "next/image";
 
 export default function SignupPage() {
   const [userData, setUserData] = useState({

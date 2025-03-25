@@ -36,7 +36,7 @@ export default function InstructorDashboard() {
   );
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [expandedCourses, setExpandedCourses] = useState<string[]>([]); // ✅ Track expanded courses
+  // const [expandedCourses, setExpandedCourses] = useState<string[]>([]); // ✅ Track expanded courses
   const router = useRouter();
 
   useEffect(() => {
@@ -47,7 +47,7 @@ export default function InstructorDashboard() {
           throw new Error("User is not authenticated.");
         }
 
-        const userId = session.user.id; // ✅ Extract userId
+        // const userId = session.user.id; // ✅ Extract userId
 
         const response = await axios.get(
           `${process.env.NEXT_PUBLIC_BACKEND_URL}/courses`
@@ -69,13 +69,13 @@ export default function InstructorDashboard() {
   if (!dashboardData) return <p className="text-center">No data available.</p>;
 
   // ✅ Toggle Expand/Collapse Courses
-  const toggleCourseExpand = (courseId: string) => {
-    setExpandedCourses((prev) =>
-      prev.includes(courseId)
-        ? prev.filter((id) => id !== courseId)
-        : [...prev, courseId]
-    );
-  };
+  // const toggleCourseExpand = (courseId: string) => {
+  //   setExpandedCourses((prev) =>
+  //     prev.includes(courseId)
+  //       ? prev.filter((id) => id !== courseId)
+  //       : [...prev, courseId]
+  //   );
+  // };
 
   return (
     <div className="max-w-4xl mx-auto p-6">
